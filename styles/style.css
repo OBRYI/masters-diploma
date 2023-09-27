@@ -1,0 +1,7 @@
+body {
+    display: flex;
+}
+
+video {
+    transform: rotateY(180deg);
+}

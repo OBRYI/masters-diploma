@@ -1,0 +1,10 @@
+const vertexShaderSource = `
+attribute vec3 vertex;
+attribute vec3 normal;
+attribute vec2 texCoord;
+varying vec2 v_texcoord;
+void main(){
+    v_texcoord = texCoord;
+    gl_Position = vec4(vertex,1.0);
+}
+`
