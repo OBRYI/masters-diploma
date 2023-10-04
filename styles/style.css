@@ -1,0 +1,23 @@
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+video {
+    max-width: 320px;
+    max-height: 240px;
+    transform: rotateY(180deg);
+}
+
+#over {
+    border:2px solid red;
+    position: absolute;
+}
+/* #cent{
+    position: absolute;
+    left: 315px;
+    top: 235px;
+    width:10px;
+    height:10px;
+    background-color: white;
+} */

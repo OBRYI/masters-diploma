@@ -1,0 +1,42 @@
+const fragmentShaderSource = `
+#ifdef GL_FRAGMENT_PRECISION_HIGH
+    precision highp float;
+#else
+    precision mediump float;
+#endif
+
+#define PI 3.14159265359
+
+uniform vec4 color;
+
+uniform sampler2D tmu;
+
+uniform vec2 screen;
+
+varying vec2 v_texcoord;
+
+uniform bool line;
+
+
+float map(float value, float min1, float max1, float min2, float max2) {
+  return min2 + (value - min1) * (max2 - min2) / (max1 - min1);
+}
+
+vec2 texCoords(vec2 coords){
+    float a = map(coords.x,0.0,screen.x,0.0,2.0*PI);
+    float yNorm = map(coords.y,0.0,screen.y,2.0,-1.0);
+    float phi = atan(yNorm);
+    float hamma = (phi+PI*0.5)*0.5;
+    float rMin=0.0;
+    float rMax= 0.5;
+    float r = rMin+cos(hamma)*(rMax-rMin);
+    float u = cos(a)*r+0.5;
+    float v = sin(a)*r+0.5;
+    return vec2(u,v);
+}
+
+void main(){
+    vec4 color = texture2D(tmu,texCoords(vec2(gl_FragCoord.x,screen.y-gl_FragCoord.y)));
+    gl_FragColor = color;
+}
+`
